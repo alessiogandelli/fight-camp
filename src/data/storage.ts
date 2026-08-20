@@ -1,16 +1,36 @@
-import type { ActiveSnapshot, AppData } from '../types';
-import { seedData } from './seed';
+import type { ActiveSnapshot, AppData, Technique } from '../types';
+import { seedData, SEED_TECHNIQUES } from './seed';
 
 const DATA_KEY = 'combat-training:data:v1';
 const ACTIVE_KEY = 'combat-training:active:v1';
+const VERSION = 2;
+
+function migrate(data: AppData): AppData {
+  if (data.version >= VERSION) return data;
+  if (data.version === 1) {
+    const shortById = new Map(SEED_TECHNIQUES.map((t) => [t.id, t]));
+    const techniques: Technique[] = data.techniques.map((t) => {
+      const seed = shortById.get(t.id);
+      if (seed && !t.custom) {
+        return { ...t, shortName: seed.shortName, shortNameEn: seed.shortNameEn };
+      }
+      return t;
+    });
+    return { ...data, version: VERSION, techniques };
+  }
+  return data;
+}
 
 export function loadData(): AppData {
   try {
     const raw = localStorage.getItem(DATA_KEY);
     if (!raw) return seedData();
     const parsed = JSON.parse(raw) as AppData;
-    if (!parsed || parsed.version !== 1 || !Array.isArray(parsed.techniques)) return seedData();
-    return parsed;
+    if (!parsed || !Array.isArray(parsed.techniques)) return seedData();
+    if (parsed.version !== 1 && parsed.version !== VERSION) return seedData();
+    const migrated = migrate(parsed);
+    if (migrated.version !== parsed.version) saveData(migrated);
+    return migrated;
   } catch {
     return seedData();
   }

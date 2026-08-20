@@ -91,13 +91,13 @@ export default function Shell() {
                 end={n.end}
                 className={({ isActive }) =>
                   cx(
-                    'flex flex-col items-center gap-0.5 py-1 text-[9px] font-black uppercase tracking-wider transition',
+                    'flex min-w-0 flex-col items-center gap-0.5 py-1 text-[9px] font-black uppercase tracking-wide transition',
                     isActive ? 'text-accent' : 'text-mut',
                   )
                 }
               >
                 <Icon size={22} />
-                {t(n.key)}
+                <span className="max-w-full truncate px-0.5">{t(n.key)}</span>
               </NavLink>
             );
           })}

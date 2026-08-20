@@ -4,11 +4,11 @@ export type Message = { it: string; en: string };
 
 export const messages: Record<string, Message> = {
   // nav
-  'nav.train': { it: 'Allenamento', en: 'Train' },
-  'nav.workouts': { it: 'Allenamenti', en: 'Workouts' },
-  'nav.combos': { it: 'Combinazioni', en: 'Combos' },
+  'nav.train': { it: 'Allenati', en: 'Train' },
+  'nav.workouts': { it: 'Workout', en: 'Workouts' },
+  'nav.combos': { it: 'Combo', en: 'Combos' },
   'nav.history': { it: 'Storico', en: 'History' },
-  'nav.stats': { it: 'Statistiche', en: 'Stats' },
+  'nav.stats': { it: 'Stats', en: 'Stats' },
 
   // common
   'common.cancel': { it: 'Annulla', en: 'Cancel' },
@@ -155,7 +155,7 @@ export const messages: Record<string, Message> = {
   'live.exitWorkout': { it: 'Esci dall\'allenamento', en: 'Exit workout' },
   'live.previous': { it: 'Precedente', en: 'Previous' },
   'live.skip': { it: 'Salta', en: 'Skip' },
-  'live.restart': { it: 'Ricomincia', en: 'Restart' },
+  'live.restart': { it: 'Riavvia', en: 'Restart' },
   'live.sound': { it: 'Suono', en: 'Sound' },
   'live.vibe': { it: 'Vibrazione', en: 'Vibe' },
   'live.exit': { it: 'Esci', en: 'Exit' },

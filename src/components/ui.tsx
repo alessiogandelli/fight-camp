@@ -271,20 +271,20 @@ export function Stepper({
     <div className="flex h-12 items-stretch overflow-hidden rounded-xl border border-line bg-panel2">
       <button
         type="button"
-        className="flex w-12 items-center justify-center text-mut transition active:bg-line disabled:opacity-30"
+        className="flex w-8 items-center justify-center text-mut transition active:bg-line disabled:opacity-30 sm:w-12"
         onClick={() => onChange(clamp(value - step))}
         disabled={value <= min}
         aria-label={t('common.decrease')}
       >
         <IconMinus size={18} />
       </button>
-      <div className="tabular flex flex-1 items-center justify-center text-base font-black">
+      <div className="tabular flex flex-1 items-center justify-center text-sm font-black sm:text-base">
         {value}
         {suffix ? <span className="ml-1 text-xs font-semibold text-mut">{suffix}</span> : null}
       </div>
       <button
         type="button"
-        className="flex w-12 items-center justify-center text-mut transition active:bg-line disabled:opacity-30"
+        className="flex w-8 items-center justify-center text-mut transition active:bg-line disabled:opacity-30 sm:w-12"
         onClick={() => onChange(clamp(value + step))}
         disabled={value >= max}
         aria-label={t('common.increase')}
@@ -340,7 +340,7 @@ export function TimeField({
     <div className={cx('flex h-12 items-stretch overflow-hidden rounded-xl border bg-panel2', bad ? 'border-accent' : 'border-line')}>
       <button
         type="button"
-        className="flex w-11 items-center justify-center text-mut transition active:bg-line disabled:opacity-30"
+        className="flex w-7 items-center justify-center text-mut transition active:bg-line disabled:opacity-30 sm:w-11"
         onClick={() => onChange(clamp(value - step))}
         disabled={value <= min}
         aria-label={t('common.decrease')}
@@ -348,7 +348,7 @@ export function TimeField({
         <IconMinus size={16} />
       </button>
       <input
-        className="tabular w-full min-w-0 flex-1 bg-transparent text-center text-base font-black outline-none"
+        className="tabular w-full min-w-0 flex-1 bg-transparent text-center text-sm font-black outline-none sm:text-base"
         value={text}
         inputMode="numeric"
         onFocus={(e) => {
@@ -366,7 +366,7 @@ export function TimeField({
       />
       <button
         type="button"
-        className="flex w-11 items-center justify-center text-mut transition active:bg-line disabled:opacity-30"
+        className="flex w-7 items-center justify-center text-mut transition active:bg-line disabled:opacity-30 sm:w-11"
         onClick={() => onChange(clamp(value + step))}
         disabled={value >= max}
         aria-label={t('common.increase')}

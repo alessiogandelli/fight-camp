@@ -18,8 +18,6 @@ import {
   IconRestart,
   IconSkipBack,
   IconSkipFwd,
-  IconVibe,
-  IconVolume,
   IconX,
 } from '../components/Icons';
 
@@ -64,7 +62,7 @@ function workLabel(seg: Segment, t: TFn): string {
 export default function LivePage() {
   const location = useLocation();
   const nav = useNavigate();
-  const { data, setSettings } = useStore();
+  const { data } = useStore();
   const { t, lang } = useI18n();
 
   const navState = (location.state ?? null) as LiveNavState | null;
@@ -199,18 +197,9 @@ export default function LivePage() {
                 <IconSkipFwd size={26} />
               </ControlBtn>
             </div>
-            <div className="mx-auto mt-3 flex max-w-md items-center justify-center gap-1.5">
+            <div className="mx-auto mt-3 flex max-w-md flex-wrap items-center justify-center gap-1.5">
               <SmallBtn onClick={engine.restart}>
                 <IconRestart size={15} /> {t('live.restart')}
-              </SmallBtn>
-              <SmallBtn onClick={() => setSettings({ sound: !data.settings.sound })} active={data.settings.sound}>
-                <IconVolume size={15} muted={!data.settings.sound} /> {t('live.sound')}
-              </SmallBtn>
-              <SmallBtn
-                onClick={() => setSettings({ vibration: !data.settings.vibration })}
-                active={data.settings.vibration}
-              >
-                <IconVibe size={15} muted={!data.settings.vibration} /> {t('live.vibe')}
               </SmallBtn>
               <SmallBtn onClick={() => setExitConfirm(true)}>
                 <IconX size={15} /> {t('live.exit')}
@@ -434,18 +423,25 @@ function TechList({
   pop?: boolean;
   shortOf: ShortOf;
 }) {
-  const cls =
+  const longest = ids.reduce((m, id) => Math.max(m, shortOf(id).length), 0);
+  const fitVw = 90 / (0.65 * Math.max(1, longest));
+  const base =
     size === 'lg'
       ? ids.length > 4
-        ? 'text-[clamp(1.6rem,min(7.5vw,9vh),3.4rem)]'
-        : 'text-[clamp(2rem,min(10vw,12vh),5rem)]'
-      : 'text-[clamp(1rem,min(4.5vw,6vh),1.8rem)]';
+        ? 'clamp(1.6rem,min(7.5vw,9vh),3.4rem)'
+        : 'clamp(2rem,min(10vw,12vh),5rem)'
+      : 'clamp(1rem,min(4.5vw,6vh),1.8rem)';
+  const fontSize = `min(${base}, ${fitVw}vw)`;
   return (
-    <div className={cx('flex min-h-0 flex-col items-center justify-center leading-tight', pop ? 'combo-pop' : '')}>
+    <div className={cx('flex min-h-0 w-full flex-col items-center justify-center leading-tight', pop ? 'combo-pop' : '')}>
       {ids.map((id, i) => (
         <span
           key={`${id}-${i}`}
-          className={cx('font-black uppercase tracking-tight', cls, dim ? 'text-mut' : 'text-ink')}
+          className={cx(
+            'max-w-full whitespace-nowrap font-black uppercase tracking-tight',
+            dim ? 'text-mut' : 'text-ink',
+          )}
+          style={{ fontSize }}
         >
           {shortOf(id)}
         </span>
@@ -466,14 +462,11 @@ function ControlBtn({ onClick, label, children }: { onClick: () => void; label: 
   );
 }
 
-function SmallBtn({ onClick, children, active }: { onClick: () => void; children: React.ReactNode; active?: boolean }) {
+function SmallBtn({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       onClick={onClick}
-      className={cx(
-        'flex h-9 items-center gap-1.5 rounded-full border px-3 text-[10px] font-black uppercase tracking-wider transition',
-        active === false ? 'border-line text-mut/50' : 'border-line text-mut hover:text-ink',
-      )}
+      className="flex h-9 items-center gap-1.5 rounded-full border border-line px-3 text-[10px] font-black uppercase tracking-wider text-mut transition hover:text-ink"
     >
       {children}
     </button>

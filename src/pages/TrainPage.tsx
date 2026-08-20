@@ -12,6 +12,7 @@ import { Button, Card, Field, Segmented, Select, Stepper, TimeField, Toggle, cx 
 import ComboPicker from '../components/ComboPicker';
 import { IconChevronDown, IconPlay, IconX } from '../components/Icons';
 import { useToast } from '../components/Toast';
+import { vibrationSupported } from '../lib/vibrate';
 
 type ModeId = 'heavy-bag' | 'combo-workout' | 'tabata' | 'intervals' | 'free';
 
@@ -529,11 +530,13 @@ function TimerSettingsCard() {
       <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-mut">{t('train.timerSettings')}</h2>
       <div className="mt-2 grid grid-cols-1 gap-1">
         <Toggle checked={data.settings.sound} onChange={(v) => setSettings({ sound: v })} label={t('train.soundCues')} />
-        <Toggle
-          checked={data.settings.vibration}
-          onChange={(v) => setSettings({ vibration: v })}
-          label={t('train.vibration')}
-        />
+        {vibrationSupported ? (
+          <Toggle
+            checked={data.settings.vibration}
+            onChange={(v) => setSettings({ vibration: v })}
+            label={t('train.vibration')}
+          />
+        ) : null}
       </div>
       <div className="mt-3 grid grid-cols-2 items-end gap-3">
         <Field label={t('train.prepCountdown')} hint={t('train.prepHint')}>
