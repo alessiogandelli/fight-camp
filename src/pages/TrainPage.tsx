@@ -10,11 +10,12 @@ import { fmtClock } from '../lib/format';
 import { configFromWorkout, summarizeWorkout } from '../lib/session';
 import { Button, Card, Field, Segmented, Select, Stepper, TimeField, Toggle, cx } from '../components/ui';
 import ComboPicker from '../components/ComboPicker';
+import PushupCounter from '../components/PushupCounter';
 import { IconChevronDown, IconPlay, IconX } from '../components/Icons';
 import { useToast } from '../components/Toast';
 import { vibrationSupported } from '../lib/vibrate';
 
-type ModeId = 'heavy-bag' | 'combo-workout' | 'tabata' | 'intervals' | 'free';
+type ModeId = 'heavy-bag' | 'combo-workout' | 'tabata' | 'intervals' | 'free' | 'pushups';
 
 const MODES: { id: ModeId; titleKey: string; subKey: string }[] = [
   { id: 'heavy-bag', titleKey: 'train.heavyBag', subKey: 'train.heavyBagSub' },
@@ -22,6 +23,7 @@ const MODES: { id: ModeId; titleKey: string; subKey: string }[] = [
   { id: 'tabata', titleKey: 'train.tabata', subKey: 'train.tabataSub' },
   { id: 'intervals', titleKey: 'train.intervals', subKey: 'train.intervalsSub' },
   { id: 'free', titleKey: 'train.free', subKey: 'train.freeSub' },
+  { id: 'pushups', titleKey: 'pushups.title', subKey: 'pushups.sub' },
 ];
 
 export default function TrainPage() {
@@ -92,6 +94,7 @@ export default function TrainPage() {
             {m.id === 'tabata' ? <TabataConfig onStart={go} /> : null}
             {m.id === 'intervals' ? <IntervalsConfig onStart={go} /> : null}
             {m.id === 'free' ? <FreeConfig onStart={go} /> : null}
+            {m.id === 'pushups' ? <PushupCounter /> : null}
           </ModeCard>
         ))}
       </div>

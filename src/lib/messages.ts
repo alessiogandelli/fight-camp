@@ -314,6 +314,24 @@ export const messages: Record<string, Message> = {
   'session.rest': { it: 'RIPOSO', en: 'REST' },
   'session.deletedCombo': { it: 'COMBINAZIONE ELIMINATA', en: 'DELETED COMBO' },
   'session.unknown': { it: 'Sconosciuto', en: 'Unknown' },
+
+  // push-up counter
+  'pushups.title': { it: 'Flessioni', en: 'Push-ups' },
+  'pushups.sub': { it: 'Contatore automatico con la fotocamera', en: 'Automatic counter using the camera' },
+  'pushups.hint': { it: 'Posiziona il telefono a terra con la fotocamera frontale rivolta verso l\'alto e scendi sopra di lui: ogni flessione viene contata automaticamente.', en: 'Lay the phone on the floor with the front camera facing up and lower yourself over it: each rep is counted automatically.' },
+  'pushups.name': { it: 'Flessioni', en: 'Push-ups' },
+  'pushups.exercise': { it: 'Flessioni', en: 'Push-ups' },
+  'pushups.count': { it: 'flessioni', en: 'push-ups' },
+  'pushups.detecting': { it: 'Rilevamento attivo', en: 'Detecting' },
+  'pushups.moveCloser': { it: 'Avvicinati o regola la sensibilità', en: 'Move closer or adjust sensitivity' },
+  'pushups.sensitivity': { it: 'Sensibilità', en: 'Sensitivity' },
+  'pushups.save': { it: 'Salva', en: 'Save' },
+  'pushups.stop': { it: 'Ferma', en: 'Stop' },
+  'pushups.saved': { it: 'Sessione di flessioni salvata', en: 'Push-up session saved' },
+  'pushups.nothingToSave': { it: 'Nessuna flessione da salvare', en: 'No push-ups to save' },
+  'pushups.errorPermission': { it: 'Permesso fotocamera negato. Concedi l\'accesso alla fotocamera nelle impostazioni del browser.', en: 'Camera permission denied. Allow camera access in your browser settings.' },
+  'pushups.errorNoCamera': { it: 'Nessuna fotocamera trovata.', en: 'No camera found.' },
+  'pushups.errorGeneric': { it: 'Impossibile avviare la fotocamera.', en: 'Could not start the camera.' },
 };
 
 export function translate(lang: Lang, key: string, vars?: Record<string, string | number>): string {
